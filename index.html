@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>საქორწილო მოსაწვევი</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            /* თბილი ატმისფერი და კრემისფერი ფონი */
+            background: linear-gradient(135deg, #fef3c7 0%, #ffe4e6 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 15px;
+            overflow: hidden;
+        }
+
+        /* მობილურის კონტეინერი */
+        .invitation-container {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            width: 100%;
+            max-width: 412px;
+            height: 840px;
+            max-height: 95vh;
+            border-radius: 35px;
+            box-shadow: 0 25px 50px rgba(251, 113, 133, 0.15);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            border: 2px solid rgba(255, 255, 255, 0.6);
+        }
+
+        /* ზედა თბილი აკვარელის ეფექტი */
+        .top-watercolor {
+            width: 100%;
+            height: 200px;
+            background: radial-gradient(circle at 50% -20%, #fecdd3 0%, #ffe4e6 60%, transparent 100%);
+            opacity: 0.9;
+            position: relative;
+        }
+
+        /* კონტენტი და ტექსტები */
+        .card-content {
+            padding: 0 32px;
+            text-align: center;
+            z-index: 5;
+            width: 100%;
+            transform: translateY(-20px);
+        }
+
+        /* ტექსტების ანიმაციური ამოსვლა */
+        .guest-name {
+            font-size: 1.4rem;
+            color: #9f1239; /* თბილი მუქი შინდისფერი */
+            font-weight: bold;
+            margin-bottom: 18px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .main-message {
+            font-size: 1.05rem;
+            color: #4c0519;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.3s forwards;
+        }
+
+        .couple-names {
+            font-size: 2.3rem;
+            color: #1e293b;
+            font-weight: 300;
+            letter-spacing: 1px;
+            margin: 15px 0;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.6s forwards;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+
+        /* საინფორმაციო ბლოკი */
+        .details-box {
+            background: rgba(2fff, 2fff, 2fff, 0.6);
+            border: 1px solid #fecdd3;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 25px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.9s forwards;
+            box-shadow: 0 10px 25px rgba(251, 113, 133, 0.05);
+        }
+
+        .detail-item {
+            font-size: 1.05rem;
+            color: #4f46e5;
+            margin: 10px 0;
+            font-weight: 500;
+        }
+
+        .detail-item strong {
+            color: #be123c;
+        }
+
+        .parents-signature {
+            font-size: 0.95rem;
+            color: #475569;
+            line-height: 1.6;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 1.2s forwards;
+        }
+
+        .parents-signature strong {
+            color: #0f172a;
+            display: block;
+            margin-top: 6px;
+            font-size: 1.1rem;
+        }
+
+        /* თბილი ფერის რუკის ღილაკი */
+        .map-link {
+            display: inline-block;
+            width: 100%;
+            background: linear-gradient(135deg, #e11d48 0%, #be123c 100%);
+            color: white;
+            text-decoration: none;
+            padding: 15px;
+            border-radius: 14px;
+            font-weight: 600;
+            margin-top: 25px;
+            box-shadow: 0 8px 20px rgba(190, 18, 60, 0.2);
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 1.5s forwards;
+        }
+
+        .map-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px rgba(190, 18, 60, 0.3);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ქვედა აკვარელის ზონა */
+        .bottom-landscape {
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(to top, #ffe4e6 20%, transparent 100%);
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            z-index: 2;
+        }
+
+        .hall-illustration {
+            font-size: 4.5rem;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 4px 10px rgba(225, 29, 72, 0.15));
+            animation: floatArt 3s ease-in-out infinite;
+        }
+
+        @keyframes floatArt {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        /* ==========================================
+           მცურავი გულების ანიმაციის სტილები (Hearts)
+        ========================================== */
+        .heart {
+            position: absolute;
+            bottom: -20px;
+            color: rgba(225, 29, 72, 0.2); /* ნაზი გამჭვირვალე წითელი */
+            font-size: 20px;
+            pointer-events: none;
+            animation: fly Up 6s linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes flyUp {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-850px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="invitation-container">
+        
+        <div class="heart" style="left: 10%; animation-delay: 0s; font-size: 16px;">❤️</div>
+        <div class="heart" style="left: 25%; animation-delay: 2s; font-size: 24px;">💖</div>
+        <div class="heart" style="left: 45%; animation-delay: 1s; font-size: 14px;">❤️</div>
+        <div class="heart" style="left: 65%; animation-delay: 4s; font-size: 22px;">💕</div>
+        <div class="heart" style="left: 80%; animation-delay: 3s; font-size: 18px;">❤️</div>
+        <div class="heart" style="left: 90%; animation-delay: 5s; font-size: 25px;">💗</div>
+        
+        <div class="top-watercolor"></div>
+
+        <div class="card-content">
+            <p class="guest-name">პატივცემულო გოდერძი,</p>
+            
+            <p class="main-message">
+                უმორჩილესად გთხოვთ, მობრძანდეთ ჩვენი შვილების ქორწილში და გაგვიზიაროთ ეს დიდი სიხარული.
+            </p>
+
+            <div class="couple-names">
+                ამირანი & ნანა
+            </div>
+
+            <div class="details-box">
+                <div class="detail-item">📅 თარიღი: <strong>24ივნისი</strong></div>
+                <div class="detail-item">⏰ დრო: <strong>18:00 საათი</strong></div>
+                <div class="detail-item">📍 ადგილი: <strong>დარბაზი „ლიდერი“</strong></div>
+            </div>
+
+            <p class="parents-signature">
+                პატივისცემით,
+                <strong>ნანული და იუსუფ ნაკაშიძეები</strong>
+            </p>
+
+            <a href="https://maps.app.goo.gl/nfh4yNNCc9WiwLwj8?g_st=ic" target="_blank" class="map-link">
+                💝 იხილეთ ლოკაცია რუკაზე
+            </a>
+        </div>
+
+        <div class="bottom-landscape">
+            <div class="hall-illustration">🏛️</div>
+        </div>
+
+    </div>
+
+</body>
+</html>

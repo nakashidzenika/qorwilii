@@ -1,0 +1,22 @@
+{
+	"folders": [
+		{
+			"path": "../nikqw/Nika's busines/NikasSite/bin"
+		},
+		{
+			"path": "../nikqw/Nika's busines/NikasSite/obj"
+		},
+		{
+			"path": "../nikqw/Nika's busines/NikasSite/Pages"
+		},
+		{
+			"path": "../nikqw/Nika's busines/NikasSite/Properties"
+		},
+		{
+			"path": "../nikqw/Nika's busines/NikasSite/wwwroot"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "bin"
+	}
+}
